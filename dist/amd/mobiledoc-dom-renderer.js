@@ -900,8 +900,12 @@ define('mobiledoc-dom-renderer/renderers/0-3', ['exports', 'mobiledoc-dom-render
         var element = undefined;
         var lowerCaseTagName = tagName.toLowerCase();
         if (this.sectionElementRenderer[lowerCaseTagName]) {
+          console.log(tagname);
+          console.log("option a - " + lowerCaseTagName);
           element = this.sectionElementRenderer[lowerCaseTagName](tagName, this.dom);
         } else {
+          console.log(tagname);
+          console.log("option b");
           element = this.dom.createElement(tagName);
         }
 
@@ -980,9 +984,12 @@ define('mobiledoc-dom-renderer/utils/tag-names', ['exports', 'mobiledoc-dom-rend
   'use strict';
 
   exports.isValidSectionTagName = isValidSectionTagName;
+  exports.isValidSectionElementName = isValidSectionElementName;
   exports.isValidMarkerType = isValidMarkerType;
 
   var MARKUP_SECTION_TAG_NAMES = ['p', 'h1', 'h2', 'h3', 'blockquote', 'pull-quote', 'left-align', 'center-align', 'right-align'].map(_mobiledocDomRendererUtilsDom.normalizeTagName);
+
+  var MARKUP_SECTION_ELEMENT_NAMES = ['p', 'h3', 'h2', 'h1', 'blockquote'].map(_mobiledocDomRendererUtilsDom.normalizeTagName);
 
   var LIST_SECTION_TAG_NAMES = ['ul', 'ol'].map(_mobiledocDomRendererUtilsDom.normalizeTagName);
 
@@ -1002,6 +1009,19 @@ define('mobiledoc-dom-renderer/utils/tag-names', ['exports', 'mobiledoc-dom-rend
         return contains(LIST_SECTION_TAG_NAMES, tagName);
       default:
         throw new Error('Cannot validate tagName for unknown section type "' + sectionType + '"');
+    }
+  }
+
+  function isValidSectionElementName(tagName, sectionType) {
+    tagName = (0, _mobiledocDomRendererUtilsDom.normalizeTagName)(tagName);
+
+    switch (sectionType) {
+      case _mobiledocDomRendererUtilsSectionTypes.MARKUP_SECTION_TYPE:
+        return contains(MARKUP_SECTION_ELEMENT_NAMES, tagName);
+      case _mobiledocDomRendererUtilsSectionTypes.LIST_SECTION_TYPE:
+        return contains(LIST_SECTION_TAG_NAMES, tagName);
+      default:
+        throw new Error('Cannot validate elementName for unknown section type "' + sectionType + '"');
     }
   }
 

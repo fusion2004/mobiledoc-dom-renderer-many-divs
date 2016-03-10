@@ -438,8 +438,12 @@ var Renderer = (function () {
       var element = undefined;
       var lowerCaseTagName = tagName.toLowerCase();
       if (this.sectionElementRenderer[lowerCaseTagName]) {
+        console.log(tagname);
+        console.log("option a - " + lowerCaseTagName);
         element = this.sectionElementRenderer[lowerCaseTagName](tagName, this.dom);
       } else {
+        console.log(tagname);
+        console.log("option b");
         element = this.dom.createElement(tagName);
       }
 
