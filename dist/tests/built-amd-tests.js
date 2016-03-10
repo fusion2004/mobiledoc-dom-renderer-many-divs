@@ -63,7 +63,7 @@ QUnit.test('tests/jshint/renderers/0-2.js should pass jshint', function(assert) 
 
 QUnit.module('JSHint - tests/jshint/renderers');
 QUnit.test('tests/jshint/renderers/0-3.js should pass jshint', function(assert) { 
-  assert.ok(false, 'tests/jshint/renderers/0-3.js should pass jshint.\ntests/jshint/renderers/0-3.js: line 356, col 7, \'console\' is not defined.\ntests/jshint/renderers/0-3.js: line 357, col 7, \'console\' is not defined.\ntests/jshint/renderers/0-3.js: line 360, col 7, \'console\' is not defined.\ntests/jshint/renderers/0-3.js: line 361, col 7, \'console\' is not defined.\n\n4 errors'); 
+  assert.ok(true, 'tests/jshint/renderers/0-3.js should pass jshint.'); 
 });
 
 QUnit.module('JSHint - tests/jshint/unit/renderers');

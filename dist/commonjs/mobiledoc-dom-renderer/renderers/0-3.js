@@ -438,13 +438,14 @@ var Renderer = (function () {
       var element = undefined;
       var lowerCaseTagName = tagName.toLowerCase();
       if (this.sectionElementRenderer[lowerCaseTagName]) {
-        console.log(tagName);
-        console.log("option a - " + lowerCaseTagName);
         element = this.sectionElementRenderer[lowerCaseTagName](tagName, this.dom);
       } else {
-        console.log(tagName);
-        console.log("option b");
-        element = this.dom.createElement(tagName);
+        if ((0, _utilsTagNames.isValidSectionElementName)(tagName, _utilsSectionTypes.MARKUP_SECTION_TYPE)) {
+          element = this.dom.createElement(tagName);
+        } else {
+          element = this.dom.createElement('div');
+          (0, _utilsDom.addClassName)(element, tagName);
+        }
       }
 
       this.renderMarkersOnElement(element, markers);

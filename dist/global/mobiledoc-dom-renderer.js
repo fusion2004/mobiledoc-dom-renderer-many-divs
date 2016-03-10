@@ -1120,13 +1120,14 @@ define('mobiledoc-dom-renderer/renderers/0-3', ['exports', 'mobiledoc-dom-render
         var element = undefined;
         var lowerCaseTagName = tagName.toLowerCase();
         if (this.sectionElementRenderer[lowerCaseTagName]) {
-          console.log(tagName);
-          console.log("option a - " + lowerCaseTagName);
           element = this.sectionElementRenderer[lowerCaseTagName](tagName, this.dom);
         } else {
-          console.log(tagName);
-          console.log("option b");
-          element = this.dom.createElement(tagName);
+          if ((0, _mobiledocDomRendererUtilsTagNames.isValidSectionElementName)(tagName, _mobiledocDomRendererUtilsSectionTypes.MARKUP_SECTION_TYPE)) {
+            element = this.dom.createElement(tagName);
+          } else {
+            element = this.dom.createElement('div');
+            (0, _mobiledocDomRendererUtilsDom.addClassName)(element, tagName);
+          }
         }
 
         this.renderMarkersOnElement(element, markers);
@@ -1162,6 +1163,7 @@ define('mobiledoc-dom-renderer/utils/dom', ['exports'], function (exports) {
 
   exports.createTextNode = createTextNode;
   exports.normalizeTagName = normalizeTagName;
+  exports.addClassName = addClassName;
   function addHTMLSpaces(text) {
     var nbsp = ' ';
     return text.replace(/  /g, ' ' + nbsp);
@@ -1173,6 +1175,11 @@ define('mobiledoc-dom-renderer/utils/dom', ['exports'], function (exports) {
 
   function normalizeTagName(tagName) {
     return tagName.toLowerCase();
+  }
+
+  function addClassName(element, className) {
+    // FIXME-IE IE10+
+    element.classList.add(className);
   }
 });
 define("mobiledoc-dom-renderer/utils/marker-types", ["exports"], function (exports) {
