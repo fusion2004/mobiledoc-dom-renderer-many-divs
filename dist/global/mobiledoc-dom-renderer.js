@@ -1120,11 +1120,11 @@ define('mobiledoc-dom-renderer/renderers/0-3', ['exports', 'mobiledoc-dom-render
         var element = undefined;
         var lowerCaseTagName = tagName.toLowerCase();
         if (this.sectionElementRenderer[lowerCaseTagName]) {
-          console.log(tagname);
+          console.log(tagName);
           console.log("option a - " + lowerCaseTagName);
           element = this.sectionElementRenderer[lowerCaseTagName](tagName, this.dom);
         } else {
-          console.log(tagname);
+          console.log(tagName);
           console.log("option b");
           element = this.dom.createElement(tagName);
         }
